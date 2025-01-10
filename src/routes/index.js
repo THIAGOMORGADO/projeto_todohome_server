@@ -5,13 +5,14 @@ const AddressController = require("../controllers/addressControllers");
 
 const routes = new Router();
 
-routes.get("/", AccountsControllers.gatAll);
-routes.post("/accounts", AccountsControllers.create);
+routes.get("/accounts", AccountsControllers.gatAll);
+routes.post("/accounts/create", AccountsControllers.create);
 routes.put("/accounts/:id", AccountsControllers.update);
-routes.delete("/accounts/:id", AccountsControllers.update);
+routes.delete("/accounts/:id", AccountsControllers.delete);
 
 // Provider
 routes.get("/providers", ProviderController.getProviderUser);
+routes.post("/providers/create/:id", ProviderController.postProviderUser);
 
 // Address
 

@@ -9,7 +9,7 @@ const Provider = sequelize.define("provider", {
     primaryKey: true,
     autoIncrement: true,
   },
-  provider: {
+  role: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -35,7 +35,9 @@ const Provider = sequelize.define("provider", {
   },
 });
 
-// Provider.belongsTo(User, { foreignKey: "user_id" });
+Provider.belongsTo(User);
+User.hasOne(Provider);
+
 Provider.sync({ force: true });
 
 module.exports = Provider;

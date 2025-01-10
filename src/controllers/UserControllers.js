@@ -1,30 +1,18 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/accounts");
 
+const Provider = require("../models/provider");
+
 const AccountsControllers = {
   async gatAll(req, res) {
-    const user = await User.findAll();
+    const user = await User.findAll({
+      include: [Provider],
+    });
     return res.status(200).json(user);
   },
+
   async create(req, res) {
-    const {
-      name,
-      email,
-      password,
-      address,
-      neighborhood,
-      city,
-      state,
-      country,
-      zipCode,
-      uf,
-      provider,
-      creci,
-      rg,
-      cpf,
-      cnpj,
-      birthDate,
-    } = req.body;
+    const { name, email, password } = req.body;
 
     const emailExists = await User.findOne({
       where: {
@@ -38,22 +26,9 @@ const AccountsControllers = {
         name,
         email,
         password: passwordHash,
-        address,
-        neighborhood,
-        city,
-        state,
-        country,
-        zipCode,
-        uf,
-        provider,
-        creci,
-        rg,
-        cpf,
-        cnpj,
-        birthDate,
       });
 
-      return res.status(200).json({
+      return res.status(201).json({
         message: "User created successfully",
         user,
       });
@@ -67,8 +42,7 @@ const AccountsControllers = {
   async update(req, res) {
     const { id } = req.params;
 
-    const { email, password, address, neighborhood, city, state, zipCode, uf } =
-      req.body;
+    const { name, email, password } = req.body;
 
     const user = await User.findByPk(id);
 
