@@ -2,11 +2,12 @@ const bcrypt = require("bcrypt");
 const User = require("../models/accounts");
 
 const Provider = require("../models/provider");
+const Address = require("../models/Address");
 
 const AccountsControllers = {
   async gatAll(req, res) {
     const user = await User.findAll({
-      include: [Provider],
+      include: [Provider, Address],
     });
     return res.status(200).json(user);
   },

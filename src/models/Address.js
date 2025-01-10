@@ -33,8 +33,10 @@ const Address = sequelize.define("address", {
     allowNull: false,
   },
 });
-Address.sync({ alter: true });
 
-// Address.hasMany(User, { foreignKey: "user_id" });
+Address.belongsTo(User);
+User.hasMany(Address);
+
+// Address.sync({ alter: true });
 
 module.exports = Address;

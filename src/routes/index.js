@@ -15,5 +15,7 @@ routes.get("/providers", ProviderController.getProviderUser);
 routes.post("/providers/create/:id", ProviderController.postProviderUser);
 
 // Address
+routes.get("/address", AddressController.getAddressAll);
+routes.post("/address/create/:id", AddressController.postAddressUser);
 
 module.exports = routes;
