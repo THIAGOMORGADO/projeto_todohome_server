@@ -38,6 +38,6 @@ const Provider = sequelize.define("provider", {
 Provider.belongsTo(User);
 User.hasOne(Provider);
 
-Provider.sync({ force: true });
+// Provider.sync({ force: true });
 
 module.exports = Provider;
